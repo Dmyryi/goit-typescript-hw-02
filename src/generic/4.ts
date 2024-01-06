@@ -1,17 +1,26 @@
-/*
-  Використовуйте generics та інтерфейси, щоб виправити помилку в наступних класах:
-*/
+interface ComponentProps {
+  id: number;
+  className: string;
+}
 
-class Component {
-  constructor (public props:T) {
-
+class Component<T extends ComponentProps> {
+  constructor(public props: T) {
+    // Логіка конструктора
   }
 }
 
-class Page extends Component {
-  pageInfo () {
+// Приклад використання:
+interface PageProps extends ComponentProps {
+  title: string;
+}
+
+class Page extends Component<PageProps> {
+  pageInfo() {
     console.log(this.props.title);
   }
 }
 
-export {};
+// Використання
+const pageInstance = new Page({ id: 1, className: 'page', title: 'My Page Title' });
+pageInstance.pageInfo();
+export{}
